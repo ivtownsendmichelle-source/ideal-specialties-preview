@@ -1,0 +1,244 @@
+/* I Deal Specialties — base stylesheet (single refined design).
+   Brand: navy #1a3a7a, red #cc2222 (accent only), cream ground, warm ink.
+   Display type: Fraunces (serif). Body: system sans. site.css layers the hero. */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&display=swap');
+
+:root {
+  /* Brand palette sampled from the logos + Lorie's photo background */
+  --navy: #1d2f8e;        /* royal blue — "I Deal" wordmark */
+  --navy-deep: #15205f;
+  --navy-rich: #0b1240;
+  --red: #c41d27;         /* brand red — "Specialties" wordmark */
+  --red-deep: #9d141d;
+  --cream: #faf6ee;
+  --paper: #fffdf8;
+  --ink: #20242e;
+  --muted: #5c6376;
+  --line: #e7e3d8;
+
+  --accent: var(--navy);
+  --accent-2: var(--red);
+  --section-pad: clamp(64px, 8vw, 100px);
+  --page-bg: var(--paper);
+  --hero-bg: var(--cream);
+  --maxw: 1120px;
+
+  --font-display: "Montserrat", "Segoe UI", system-ui, sans-serif;
+  --font-sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--page-bg);
+  font-size: 17.5px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+
+h1, h2, h3 { margin: 0 0 .45em; line-height: 1.12; }
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-optical-sizing: auto;
+  letter-spacing: -.012em;
+}
+h1 { font-size: clamp(40px, 5vw, 58px); color: var(--navy-deep); }
+h2 { font-size: clamp(28px, 3.4vw, 38px); color: var(--accent); }
+h3 { font-family: var(--font-sans); font-size: 19px; font-weight: 800; color: var(--navy);
+     letter-spacing: -.005em; }
+p { margin: 0 0 1em; }
+a { color: var(--accent); }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  text-transform: uppercase; letter-spacing: .16em; font-size: 12.5px;
+  font-weight: 800; color: var(--accent-2); margin: 0 0 .8em;
+}
+.eyebrow::before {
+  content: ""; width: 26px; height: 2px; background: var(--accent-2); flex: none; opacity: .85;
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-block; font-weight: 700; font-size: 16px; letter-spacing: .005em;
+  padding: 15px 30px; border-radius: 8px; text-decoration: none;
+  border: 2px solid transparent; cursor: pointer;
+  transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.btn-primary { background: var(--red); color: #fff; border-color: var(--red);
+  box-shadow: 0 8px 20px rgba(204,34,34,.22); }
+.btn-primary:hover { background: var(--red-deep); border-color: var(--red-deep);
+  transform: translateY(-2px); box-shadow: 0 12px 26px rgba(204,34,34,.30); }
+.btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.7); }
+.btn-outline { background: transparent; color: var(--navy); border-color: var(--navy); }
+.btn-outline:hover { background: rgba(26,58,122,.07); }
+.btn + .btn { margin-left: 12px; }
+
+/* ---------- header ---------- */
+.site-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 32px; max-width: var(--maxw); margin: 0 auto;
+}
+.site-header .logo img { height: 84px; display: block; }
+.nav { display: flex; align-items: center; gap: 30px; }
+.nav a { color: var(--ink); text-decoration: none; font-weight: 600; font-size: 15.5px;
+  transition: color .15s ease; }
+.nav a:hover { color: var(--red); }
+.nav .phone { color: #fff; background: var(--navy); font-weight: 800; letter-spacing: .01em;
+  padding: 9px 16px; border-radius: 7px; }
+.nav .phone:hover { color: #fff; background: var(--navy-deep); }
+
+/* ---------- hero (gradient + treatment layered in site.css) ---------- */
+.hero { position: relative; background: var(--hero-bg); overflow: hidden; }
+.hero-inner { max-width: var(--maxw); margin: 0 auto; padding: clamp(56px, 7vw, 92px) 32px;
+  position: relative; z-index: 2; }
+.hero-copy { max-width: 620px; }
+.hero h1 { font-size: clamp(40px, 5vw, 58px); color: var(--navy); margin-bottom: .3em; }
+.hero .subhead { font-size: clamp(18px, 2vw, 21px); color: var(--ink); margin-bottom: .55em;
+  max-width: 30em; }
+.hero .trustline { font-size: 18px; font-weight: 700; color: var(--red); margin-bottom: 1.5em;
+  letter-spacing: .005em; }
+.hero-media { display: none; }
+.hero-buttons { margin-top: 8px; }
+
+/* rotating photo box (auto-cycles the logistics modes) */
+.rotator { position: relative; width: 100%; aspect-ratio: 4 / 3; border-radius: 18px;
+  overflow: hidden; box-shadow: 0 26px 60px rgba(8,18,40,.42); background: #0e1f40; }
+.rotator .slide { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity .8s ease; }
+.rotator .slide.is-active { opacity: 1; }
+.rotator img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rotator figcaption { position: absolute; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(transparent, rgba(10,22,46,.9)); color: #fff;
+  font-weight: 700; font-size: 18px; padding: 38px 20px 18px; letter-spacing: .01em; }
+.rotator .dots { position: absolute; top: 16px; right: 16px; display: flex; gap: 6px; }
+.rotator .dots i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.5);
+  transition: background .3s ease; }
+.rotator .dots i.on { background: #fff; }
+
+/* stat band under hero */
+.statband { background: var(--navy-deep); color: #fff;
+  background-image: linear-gradient(180deg, var(--navy), var(--navy-deep)); }
+.statband .wrap { display: flex; gap: clamp(32px, 6vw, 80px); justify-content: center;
+  align-items: center; padding: 30px 32px; flex-wrap: wrap; text-align: center; }
+.statband .stat { font-size: 16px; font-weight: 600; color: #cdd8f0;
+  display: flex; flex-direction: column; gap: 2px; }
+.statband .stat .num { font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(30px, 4vw, 42px); color: #ffffff; line-height: 1; letter-spacing: -.01em; }
+
+/* ---------- generic sections ---------- */
+section.block { padding: var(--section-pad) 0; }
+.block.alt { background: var(--cream); }
+.lead { font-size: clamp(18px, 2vw, 20px); max-width: 720px; color: #353b48; }
+.pullquote {
+  font-family: var(--font-display); font-size: clamp(23px, 2.6vw, 29px); font-weight: 600;
+  color: var(--navy); line-height: 1.3;
+  border-left: 4px solid var(--red); padding-left: 22px; margin: 30px 0 0; max-width: 720px;
+}
+
+/* who we are + Lorie photo */
+.who-grid { display: grid; grid-template-columns: 1fr 320px; gap: 56px; align-items: center; }
+.who-photo { text-align: center; }
+.who-photo img { width: 268px; height: 268px; object-fit: cover;
+  border-radius: 50%; box-shadow: 0 16px 40px rgba(20,44,92,.26); }
+.who-photo .cap { margin-top: 18px; font-weight: 800; color: var(--navy); font-size: 18px; }
+.who-photo .cap span { display: block; font-weight: 600; color: var(--muted); font-size: 15px; }
+
+/* value pillars */
+.pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 40px; }
+.pillar { background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--accent);
+  border-radius: 12px; padding: 26px 24px; box-shadow: 0 2px 0 rgba(20,44,92,.03);
+  transition: transform .18s ease, box-shadow .18s ease; }
+.pillar:hover { transform: translateY(-3px); box-shadow: 0 16px 34px rgba(20,44,92,.12); }
+.pillar h3 { color: var(--navy); margin-bottom: .35em; }
+.pillar p { font-size: 15px; color: var(--muted); margin: 0; line-height: 1.55; }
+
+/* partnership */
+.partnership { color: #fff;
+  background:
+    radial-gradient(85% 130% at 50% 50%, rgba(196,29,39,.55) 0%, rgba(196,29,39,0) 58%),
+    linear-gradient(155deg, var(--navy) 0%, var(--navy-rich) 100%); }
+.partnership h2 { color: #fff; }
+.partnership .wrap { display: grid; grid-template-columns: 400px 1fr; gap: 60px; align-items: center; }
+.partnership .mark { background: #fff; border-radius: 18px; padding: 46px; text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,.28); }
+.partnership .mark img { width: 100%; max-width: 340px; }
+.partnership p { color: #dce4f5; }
+.programs { list-style: none; padding: 0; margin: 22px 0 0; display: flex; gap: 30px; flex-wrap: wrap; }
+.programs li { font-weight: 700; font-size: 17px; }
+.programs li::before { content: "✔"; color: #ffffff; margin-right: 9px; }
+
+/* supplier-relationships band */
+.vendors { text-align: center; }
+.vendors .wrap { max-width: 820px; }
+.vendor-eq { display: inline-block; margin: 30px auto 0; background: #fff;
+  border: 1px solid var(--line); border-top: 3px solid var(--navy);
+  color: var(--navy); font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(18px, 2.2vw, 23px); line-height: 1.4;
+  padding: 22px 32px; border-radius: 12px; box-shadow: 0 10px 30px rgba(20,44,92,.10); max-width: 640px; }
+
+/* what we source */
+.source-banner { width: 100%; height: clamp(200px, 26vw, 280px); object-fit: cover;
+  border-radius: 14px; margin-top: 22px; box-shadow: 0 14px 36px rgba(20,44,92,.16); }
+.source-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 36px; }
+.source-col { background: var(--paper); border: 1px solid var(--line); border-radius: 12px;
+  overflow: hidden; box-shadow: 0 6px 22px rgba(20,44,92,.07); }
+.source-col .col-head { background: var(--accent); color: #fff; font-weight: 800; font-size: 18px;
+  padding: 15px 22px; letter-spacing: .01em; }
+.source-col ul { margin: 0; padding: 20px 22px 22px 38px; }
+.source-col li { margin: .4em 0; font-size: 15px; }
+.catchall { margin-top: 28px; font-size: 18px; font-weight: 700; color: var(--navy); }
+
+.sourcing-strip { margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap; }
+.chip { background: #fff; border: 1px solid var(--navy); color: var(--navy); font-weight: 700;
+  padding: 10px 18px; border-radius: 999px; font-size: 15px; transition: all .15s ease; }
+.chip:hover { background: var(--navy); color: #fff; }
+
+/* testimonials (carved out, placeholders until real quotes arrive) */
+.testi { background: var(--cream); }
+.testi .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 34px; }
+.testi .card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px;
+  padding: 28px; box-shadow: 0 6px 22px rgba(20,44,92,.06); }
+.testi .ph { display: inline-block; background: var(--red); color: #fff; font-size: 11px;
+  font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 4px 10px;
+  border-radius: 5px; margin-bottom: 16px; }
+.testi .quote { font-family: var(--font-display); font-size: 18px; color: #545b6e;
+  font-style: italic; font-weight: 500; margin: 0; line-height: 1.5; }
+.testi .who2 { margin-top: 18px; font-weight: 800; color: var(--navy); font-size: 15px; }
+.testi .who2 span { display: block; font-weight: 600; color: var(--muted); }
+
+/* closing CTA */
+.cta { color: #fff; text-align: center;
+  background: linear-gradient(150deg, var(--navy) 0%, var(--navy-rich) 100%); }
+.cta h2 { color: #fff; }
+.cta p { font-size: clamp(17px, 2vw, 20px); color: #dce4f5; max-width: 600px; margin: 0 auto 1.6em; }
+.cta .btn-primary { background: var(--red); color: #fff; border-color: var(--red); }
+.cta .btn-primary:hover { background: var(--red-deep); border-color: var(--red-deep); }
+
+/* contact */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 34px; }
+.contact-card { background: var(--paper); border: 1px solid var(--line); border-left: 4px solid var(--red);
+  border-radius: 12px; padding: 30px; box-shadow: 0 8px 26px rgba(20,44,92,.08); }
+.contact-card .name { font-family: var(--font-display); font-size: 24px; font-weight: 600;
+  color: var(--navy); margin: 0; }
+.contact-card .title { color: var(--muted); margin: 0 0 16px; font-weight: 600; }
+.contact-card .row { font-size: 16.5px; margin: .35em 0; }
+
+/* footer */
+.site-footer { background: var(--navy-rich); color: #b7c2dd; }
+.site-footer a { color: #fff; text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+.site-footer .wrap { padding: 34px 32px; text-align: center; font-size: 14px; }
+.site-footer .tag { font-family: var(--font-display); font-weight: 600; color: #fff; font-size: 17px;
+  letter-spacing: .01em; }
+
+/* mockup banner (label on each comp) */
+.mock-banner { background: var(--accent-2); color: #fff; text-align: center;
+  font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 7px; }
