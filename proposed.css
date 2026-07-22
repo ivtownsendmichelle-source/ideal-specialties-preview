@@ -18,19 +18,25 @@
    Sequence: WHO WE ARE navy · WHY FOOD BANKS red · OUR SUPPLIER navy ·
    WHAT WE SOURCE red · FLEXIBLE SOURCING navy · HOW WE KEEP PRICES LOW red ·
    WHAT PARTNERS SAY navy */
-/* supplier network: red section, text left, logistics rotator right */
-.block.alt.vendors .eyebrow { background: var(--red); transform: rotate(-1.2deg); }
+/* supplier network: solid red section, text left, logistics rotator right */
+.block.alt.vendors { background: var(--red-deep); }
+.block.alt.vendors .eyebrow { background: var(--navy); transform: rotate(-1.2deg); }
 .vendors { text-align: left; }
 .vendors .wrap.vendors-grid {
   max-width: 1080px;
   display: grid; grid-template-columns: 1fr 440px; gap: 48px; align-items: center;
 }
-.vendors h2 { color: var(--red-deep); }
-.vendors-text .lead { margin-left: 0; margin-right: 0; }
-.vendors-text .vendor-eq { margin: 30px 0 0; border: 2px solid var(--red); border-left-width: 4px; }
+.vendors h2 { color: #fff; }
+.vendors-text .lead { margin-left: 0; margin-right: 0; color: rgba(255,251,242,.94); }
+.vendors-text .vendor-eq {
+  display: block; margin: 30px 0 0; background: none; border: none; box-shadow: none;
+  border-left: 4px solid var(--cream); border-radius: 0; padding: 2px 0 2px 18px;
+  font-family: var(--font-serif); font-style: italic; font-weight: 400;
+  font-size: 21px; color: var(--cream);
+}
 .logi-rotator {
   position: relative;
-  background: #fbf8f1; border: 2px solid var(--red); box-shadow: var(--shadow-red);
+  background: #fbf8f1; border: 3px solid var(--cream); box-shadow: 7px 7px 0 var(--navy-rich);
   padding: 18px 18px 14px;
 }
 .logi-rotator .lslide { display: none; margin: 0; }
