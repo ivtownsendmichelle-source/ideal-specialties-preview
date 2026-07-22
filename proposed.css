@@ -7,6 +7,40 @@
 /* keep the brand name unbroken in the hero headline (Mark) */
 .hero h1 .brandname { white-space: nowrap; }
 
+.hero-inner {
+  padding: clamp(42px, 5.2vw, 70px) 32px;
+}
+
+/* clean white header band, with the logo promoted and nav spaced around it */
+.site-header {
+  background: #fff;
+  padding: 14px 32px 16px;
+  gap: 28px;
+  box-shadow: 0 0 0 100vmax #fff;
+  clip-path: inset(0 -100vmax);
+}
+.site-header .logo { flex: 0 0 auto; }
+.site-header .logo img { height: 116px; width: auto; }
+.nav {
+  justify-content: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.nav .phone { padding: 10px 18px; }
+.cta .btn-secondary {
+  border-color: rgba(255,255,255,.9);
+  color: #fff;
+}
+.cta:has(.btn-secondary:hover) .btn-primary,
+.cta:has(.btn-secondary:focus) .btn-primary,
+.cta:has(.btn-secondary:active) .btn-primary {
+  background: transparent;
+  border-color: rgba(255,255,255,.9);
+  box-shadow: none;
+  color: #fff;
+  transform: none;
+}
+
 /* red vertical accent line (matching the pullquote) on two more lines */
 .vendor-eq { border-left: 4px solid var(--red); }
 .catchall {
@@ -34,41 +68,39 @@
   font-family: var(--font-serif); font-style: italic; font-weight: 400;
   font-size: 21px; color: var(--cream);
 }
+/* same look as the hero rotator: photo fills the frame, caption overlays the photo */
 .logi-rotator {
-  position: relative;
-  background: #fbf8f1; border: 3px solid var(--cream); box-shadow: 7px 7px 0 var(--navy-rich);
-  padding: 18px 18px 14px;
+  position: relative; aspect-ratio: 4 / 3; overflow: hidden;
+  border: 3px solid var(--cream); box-shadow: 7px 7px 0 var(--navy-rich);
+  background: #0e1f40;
 }
-.logi-rotator .lslide { display: none; margin: 0; }
-.logi-rotator .lslide.is-active { display: block; animation: ffade .5s ease; }
-.logi-rotator .lslide img {
-  display: block; width: 100%; height: 260px; object-fit: cover;
-  border: 1px solid rgba(204,34,34,.3);
-}
+.logi-rotator .lslide { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity .8s ease; }
+.logi-rotator .lslide.is-active { opacity: 1; }
+.logi-rotator .lslide img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .logi-rotator figcaption {
-  font-family: var(--font-serif); font-weight: 700; color: var(--red-deep);
-  text-transform: uppercase; letter-spacing: .05em; font-size: 14px;
-  text-align: center; margin-top: 12px;
+  position: absolute; left: 0; right: 0; bottom: 0; margin: 0;
+  background: linear-gradient(transparent, rgba(10,22,46,.9)); color: #fff;
+  font-family: var(--font-serif); font-style: italic;
+  font-weight: 700; font-size: 18px; padding: 38px 20px 18px; letter-spacing: .01em;
 }
-.ldots { display: flex; gap: 9px; justify-content: center; margin-top: 10px; }
-.ldots i { width: 9px; height: 9px; border-radius: 999px;
-  background: rgba(204,34,34,.25); display: inline-block; }
-.ldots i.on { background: var(--red); }
-.lrot-btn { position: absolute; top: 44%; transform: translateY(-50%); z-index: 3;
+.ldots { position: absolute; top: 16px; right: 16px; display: flex; gap: 6px; z-index: 2; }
+.ldots i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.5);
+  transition: background .3s ease; }
+.ldots i.on { background: #fff; }
+.lrot-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
   width: 42px; height: 54px; display: flex; align-items: center; justify-content: center;
-  background: none; border: none; color: var(--red-deep);
+  background: none; border: none; color: #fff;
   font-size: 44px; font-weight: 800; line-height: 1; padding: 0 0 6px; cursor: pointer;
-  opacity: .55; transition: opacity .12s ease; }
+  opacity: .65; transition: opacity .12s ease; }
 .lrot-btn:hover { opacity: 1; }
-.lprev { left: 6px; }
-.lnext { right: 6px; }
+.lprev { left: 8px; }
+.lnext { right: 8px; }
 @media (max-width: 900px) {
   .vendors .wrap.vendors-grid { grid-template-columns: 1fr; gap: 30px; }
   .logi-rotator { max-width: 480px; }
 }
 @media (max-width: 620px) {
   .lrot-btn { display: none; }
-  .logi-rotator .lslide img { height: 210px; }
 }
 #source .flex-eyebrow { background: var(--navy); transform: rotate(-1.2deg); }
 
@@ -111,39 +143,48 @@
   text-transform: uppercase; letter-spacing: .05em; font-size: 14px; margin-top: 12px;
 }
 
-/* rotating food picture frame — Mark's real product photos, cycled above the food grid */
-.food-rotator {
-  position: relative; max-width: 480px; margin: 6px auto 40px;
-  background: #fbf8f1; border: 2px solid var(--navy); box-shadow: var(--shadow-red);
-  padding: 18px 18px 14px;
+/* group titles above each food grid (Proteins / Shelf-stable goods) */
+.fg-group-title {
+  font-family: var(--font-serif); font-weight: 700; font-size: 24px;
+  color: var(--navy); text-transform: uppercase; letter-spacing: .04em;
+  margin: 34px 0 4px; padding-bottom: 8px;
+  border-bottom: 3px solid var(--red);
 }
-.food-rotator .fslide { display: none; margin: 0; }
-.food-rotator .fslide.is-active { display: block; animation: ffade .5s ease; }
-@keyframes ffade { from { opacity: 0 } to { opacity: 1 } }
-.food-rotator .fslide img {
-  display: block; width: 100%; height: 280px; object-fit: contain; background: #fff;
-  border: 1px solid rgba(26,58,122,.25);
+.fg-group-title + .food-grid { margin-top: 22px; }
+
+/* food grid: square category panels in the original-site tile format;
+   multi-photo panels crossfade (mini rotator) */
+.food-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px 22px;
+  margin: 10px 0 34px;
 }
-.food-rotator figcaption {
+.fg-panel { margin: 0; }
+.fg-frame {
+  position: relative; aspect-ratio: 1 / 1; overflow: hidden; background: #fff;
+  border: 2px solid var(--navy); box-shadow: var(--shadow-navy);
+}
+.fg-panel:nth-child(even) .fg-frame { box-shadow: var(--shadow-red); }
+.fg-frame[role="button"] { cursor: pointer; }
+.fg-slide {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity .6s ease;
+}
+.fg-slide.is-active { opacity: 1; }
+.fg-slide.fit-contain { object-fit: contain; }
+.fg-dots { position: absolute; top: 10px; right: 10px; display: flex; gap: 5px; z-index: 2; }
+.fg-dots i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.6);
+  border: 1px solid rgba(26,58,122,.35); transition: background .3s ease; }
+.fg-dots i.on { background: var(--red); }
+.fg-cap {
   font-family: var(--font-serif); font-weight: 700; color: var(--navy);
   text-transform: uppercase; letter-spacing: .05em; font-size: 14px;
-  text-align: center; margin-top: 12px;
+  text-align: center; margin: 12px 0 0;
 }
-.fdots { display: flex; gap: 9px; justify-content: center; margin-top: 10px; }
-.fdots i { width: 9px; height: 9px; border-radius: 999px;
-  background: rgba(26,58,122,.25); display: inline-block; }
-.fdots i.on { background: var(--red); }
-.frot-btn { position: absolute; top: 44%; transform: translateY(-50%); z-index: 3;
-  width: 42px; height: 54px; display: flex; align-items: center; justify-content: center;
-  background: none; border: none; color: var(--navy);
-  font-size: 44px; font-weight: 800; line-height: 1; padding: 0 0 6px; cursor: pointer;
-  opacity: .55; transition: opacity .12s ease; }
-.frot-btn:hover { opacity: 1; }
-.fprev { left: -52px; }
-.fnext { right: -52px; }
-@media (max-width: 620px) {
-  .frot-btn { display: none; }
-  .food-rotator .fslide img { height: 220px; }
+@media (max-width: 760px) {
+  .food-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .food-grid { grid-template-columns: 1fr; }
 }
 
 /* warehouse banner now sits at the bottom of the section */
@@ -151,49 +192,62 @@
 
 /* footer: a larger logo on either side, text inside a bordered frame (Mark) */
 .footer-brand {
-  display: flex; align-items: center; justify-content: center; gap: 44px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: minmax(170px, 1fr) auto minmax(170px, 1fr);
+  align-items: center;
+  column-gap: 32px;
 }
 .footer-brand .fb-text {
   text-align: center; background: var(--navy-rich);
   border: 2px solid rgba(255,224,138,.7); box-shadow: 6px 6px 0 var(--red);
   padding: 26px 44px;
 }
-.footer-brand .fb-logo { height: 92px; width: auto; flex: none; }
-.footer-brand .partnership-mark { height: 124px; }
+.footer-brand .fb-logo { height: 108px; width: auto; justify-self: center; }
+.footer-brand .partnership-mark { height: 142px; }
 
-/* rotating testimonial — one large rectangle, cycles like the hero rotator */
-.testi-rotator { position: relative; max-width: 880px; margin: 18px auto 0; }
-.testi-rotator .tslide { display: none; }
-.testi-rotator .tslide.is-active { display: block; animation: tfade .5s ease; }
-@keyframes tfade { from { opacity: 0 } to { opacity: 1 } }
+/* testimonials shown as separate cards instead of a rotator */
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px 24px;
+  margin-top: 30px;
+}
 .testi-card {
-  background: #fff; border: 2px solid var(--navy); box-shadow: 8px 8px 0 var(--red);
-  padding: 44px 54px; min-height: 230px;
-  display: flex; flex-direction: column; justify-content: center;
+  margin: 0;
+  background: #fff; border: 2px solid var(--navy);
+  color: var(--ink);
+  padding: 34px 38px; min-height: 250px;
+  display: flex; flex-direction: column; justify-content: flex-start;
 }
-.testi-card .quote { margin: 0 0 20px; font-size: 22px; }
-.testi-card.blank {
-  align-items: center; justify-content: center; text-align: center;
-  background: #fbf8f1; border-style: dashed; box-shadow: 8px 8px 0 rgba(26,58,122,.22);
+.testi-card:nth-child(odd) { box-shadow: 8px 8px 0 var(--red); }
+.testi-card:nth-child(even) {
+  background: #fff;
+  border-color: var(--navy);
+  box-shadow: 8px 8px 0 var(--navy);
 }
-.testi-card .tph { margin: 0; color: rgba(26,58,122,.55);
-  font-family: var(--font-serif); font-style: italic; font-size: 19px; }
-.tdots { display: flex; gap: 9px; justify-content: center; margin-top: 22px; }
-.tdots i { width: 9px; height: 9px; border-radius: 999px;
-  background: rgba(26,58,122,.25); display: inline-block; }
-.tdots i.on { background: var(--red); }
-.trot-btn { position: absolute; top: 42%; transform: translateY(-50%); z-index: 3;
-  width: 42px; height: 54px; display: flex; align-items: center; justify-content: center;
-  background: none; border: none; color: var(--navy);
-  font-size: 44px; font-weight: 800; line-height: 1; padding: 0 0 6px; cursor: pointer;
-  opacity: .55; transition: opacity .12s ease; }
-.trot-btn:hover { opacity: 1; }
-.tprev { left: 8px; }
-.tnext { right: 8px; }
+.testi-card .quote { margin: 0 0 22px; font-size: 20px; line-height: 1.45; color: #4a4438; }
+.testi-card .quote::before { color: var(--red); }
+.testi-card:nth-child(even) .quote::before { color: var(--navy); }
+.testi-card .who2 {
+  color: var(--navy);
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.testi-card .who2 span { color: var(--muted); }
 @media (max-width: 620px) {
-  .testi-card { padding: 30px 26px; }
-  .trot-btn { display: none; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .testi-card { padding: 30px 26px; min-height: 0; }
+  .testi-card .quote { font-size: 18.5px; }
+  .cta .btn {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  .cta .btn + .btn { margin-top: 14px; }
 }
 
 /* white footer background to match the logos; box keeps its navy look */
@@ -203,5 +257,38 @@
 @media (max-width: 760px) {
   .food-photos { grid-template-columns: 1fr; }
   .hero .trustline { white-space: normal; }
-  .footer-brand { gap: 26px; }
+  .hero-inner {
+    gap: 28px;
+    padding: 34px 24px 38px;
+  }
+  .hero-copy { max-width: none; }
+  .hero h1 { font-size: 36px; }
+  .hero .subhead { font-size: 18px; }
+  .rotator {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .site-header {
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px 24px 18px;
+    gap: 12px;
+  }
+  .site-header .logo img { height: 104px; }
+  .nav { justify-content: center; gap: 16px 22px; }
+  .footer-brand { display: flex; flex-direction: column; gap: 26px; }
+}
+
+@media (max-width: 480px) {
+  .hero-inner { padding: 28px 20px 34px; }
+  .hero h1 { font-size: 32px; }
+  .rotator figcaption { font-size: 16px; padding: 34px 18px 16px; }
+  .site-header .logo img { height: 92px; }
+  .nav { width: 100%; gap: 12px 16px; }
+  .nav a { font-size: 14.5px; }
+  .nav .phone {
+    width: 100%;
+    text-align: center;
+  }
+  .footer-brand .fb-text { padding: 22px 24px; }
 }
