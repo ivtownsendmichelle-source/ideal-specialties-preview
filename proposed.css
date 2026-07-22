@@ -163,6 +163,88 @@
   }
 }
 
+@media (max-width: 900px) {
+  .who-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .who-photo {
+    justify-self: center;
+    width: 100%;
+  }
+  .who-photo img {
+    display: block;
+    width: min(76vw, 280px);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+  }
+  .pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .partnership .wrap {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .partnership .mark {
+    box-sizing: border-box;
+    width: min(100%, 340px);
+    justify-self: center;
+    padding: 30px;
+  }
+  .partnership .mark img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 620px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+  .wrap {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .who-grid,
+  .partnership .wrap,
+  .pillars {
+    min-width: 0;
+  }
+  .lead,
+  .pullquote,
+  .partnership h2,
+  .partnership p,
+  .partnership li {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+  .pillars {
+    grid-template-columns: 1fr;
+  }
+  .pillar {
+    padding: 24px 22px;
+  }
+  .partnership .mark {
+    width: min(100%, 300px);
+    padding: 24px;
+  }
+  .partnership .programs {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .partnership .programs li {
+    width: 100%;
+    white-space: normal;
+  }
+}
+
 /* food photo row in What We Source — food shown FIRST, warehouse moved to bottom */
 .food-photos {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin: 4px 0 30px;
