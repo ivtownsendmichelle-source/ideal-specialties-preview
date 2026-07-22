@@ -60,6 +60,41 @@
   text-transform: uppercase; letter-spacing: .05em; font-size: 14px; margin-top: 12px;
 }
 
+/* rotating food picture frame — Mark's real product photos, cycled above the food grid */
+.food-rotator {
+  position: relative; max-width: 480px; margin: 6px auto 40px;
+  background: #fbf8f1; border: 2px solid var(--navy); box-shadow: var(--shadow-red);
+  padding: 18px 18px 14px;
+}
+.food-rotator .fslide { display: none; margin: 0; }
+.food-rotator .fslide.is-active { display: block; animation: ffade .5s ease; }
+@keyframes ffade { from { opacity: 0 } to { opacity: 1 } }
+.food-rotator .fslide img {
+  display: block; width: 100%; height: 280px; object-fit: contain; background: #fff;
+  border: 1px solid rgba(26,58,122,.25);
+}
+.food-rotator figcaption {
+  font-family: var(--font-serif); font-weight: 700; color: var(--navy);
+  text-transform: uppercase; letter-spacing: .05em; font-size: 14px;
+  text-align: center; margin-top: 12px;
+}
+.fdots { display: flex; gap: 9px; justify-content: center; margin-top: 10px; }
+.fdots i { width: 9px; height: 9px; border-radius: 999px;
+  background: rgba(26,58,122,.25); display: inline-block; }
+.fdots i.on { background: var(--red); }
+.frot-btn { position: absolute; top: 44%; transform: translateY(-50%); z-index: 3;
+  width: 42px; height: 54px; display: flex; align-items: center; justify-content: center;
+  background: none; border: none; color: var(--navy);
+  font-size: 44px; font-weight: 800; line-height: 1; padding: 0 0 6px; cursor: pointer;
+  opacity: .55; transition: opacity .12s ease; }
+.frot-btn:hover { opacity: 1; }
+.fprev { left: -52px; }
+.fnext { right: -52px; }
+@media (max-width: 620px) {
+  .frot-btn { display: none; }
+  .food-rotator .fslide img { height: 220px; }
+}
+
 /* warehouse banner now sits at the bottom of the section */
 .source-banner.at-bottom { margin-top: 34px; }
 
