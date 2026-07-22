@@ -18,7 +18,52 @@
    Sequence: WHO WE ARE navy · WHY FOOD BANKS red · OUR SUPPLIER navy ·
    WHAT WE SOURCE red · FLEXIBLE SOURCING navy · HOW WE KEEP PRICES LOW red ·
    WHAT PARTNERS SAY navy */
-.block.alt.vendors .eyebrow { background: var(--navy); transform: rotate(-1.2deg); }
+/* supplier network: red section, text left, logistics rotator right */
+.block.alt.vendors .eyebrow { background: var(--red); transform: rotate(-1.2deg); }
+.vendors { text-align: left; }
+.vendors .wrap.vendors-grid {
+  max-width: 1080px;
+  display: grid; grid-template-columns: 1fr 440px; gap: 48px; align-items: center;
+}
+.vendors h2 { color: var(--red-deep); }
+.vendors-text .lead { margin-left: 0; margin-right: 0; }
+.vendors-text .vendor-eq { margin: 30px 0 0; border: 2px solid var(--red); border-left-width: 4px; }
+.logi-rotator {
+  position: relative;
+  background: #fbf8f1; border: 2px solid var(--red); box-shadow: var(--shadow-red);
+  padding: 18px 18px 14px;
+}
+.logi-rotator .lslide { display: none; margin: 0; }
+.logi-rotator .lslide.is-active { display: block; animation: ffade .5s ease; }
+.logi-rotator .lslide img {
+  display: block; width: 100%; height: 260px; object-fit: cover;
+  border: 1px solid rgba(204,34,34,.3);
+}
+.logi-rotator figcaption {
+  font-family: var(--font-serif); font-weight: 700; color: var(--red-deep);
+  text-transform: uppercase; letter-spacing: .05em; font-size: 14px;
+  text-align: center; margin-top: 12px;
+}
+.ldots { display: flex; gap: 9px; justify-content: center; margin-top: 10px; }
+.ldots i { width: 9px; height: 9px; border-radius: 999px;
+  background: rgba(204,34,34,.25); display: inline-block; }
+.ldots i.on { background: var(--red); }
+.lrot-btn { position: absolute; top: 44%; transform: translateY(-50%); z-index: 3;
+  width: 42px; height: 54px; display: flex; align-items: center; justify-content: center;
+  background: none; border: none; color: var(--red-deep);
+  font-size: 44px; font-weight: 800; line-height: 1; padding: 0 0 6px; cursor: pointer;
+  opacity: .55; transition: opacity .12s ease; }
+.lrot-btn:hover { opacity: 1; }
+.lprev { left: 6px; }
+.lnext { right: 6px; }
+@media (max-width: 900px) {
+  .vendors .wrap.vendors-grid { grid-template-columns: 1fr; gap: 30px; }
+  .logi-rotator { max-width: 480px; }
+}
+@media (max-width: 620px) {
+  .lrot-btn { display: none; }
+  .logi-rotator .lslide img { height: 210px; }
+}
 #source .flex-eyebrow { background: var(--navy); transform: rotate(-1.2deg); }
 
 /* opportunity buying — a bordered feature box matching the page's card style */

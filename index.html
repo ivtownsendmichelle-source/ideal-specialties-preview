@@ -50,11 +50,7 @@
         <div class="rotator">
           <figure class="slide is-active"><img src="assets/stock/protein-turkey.jpg" alt="Turkey breast"><figcaption>Protein</figcaption></figure>
           <figure class="slide"><img src="assets/stock/rice.jpg" alt="Rice"><figcaption>Rice &amp; grains</figcaption></figure>
-          <figure class="slide"><img src="assets/stock/truck.jpg" alt="Freight truck"><figcaption>By truck</figcaption></figure>
-          <figure class="slide"><img src="assets/stock/rail.jpg" alt="Freight rail"><figcaption>By rail</figcaption></figure>
-          <figure class="slide"><img src="assets/stock/warehouse-2.jpg" alt="Warehouse"><figcaption>Warehoused &amp; ready</figcaption></figure>
-          <figure class="slide"><img src="assets/stock/hero-logistics.jpg" alt="Cargo ship"><figcaption>By sea</figcaption></figure>
-          <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="dots"><i class="on"></i><i></i></div>
           <button class="rot-btn prev" type="button" aria-label="Previous photo">&#8249;</button>
           <button class="rot-btn next" type="button" aria-label="Next photo">&#8250;</button>
         </div>
@@ -132,15 +128,26 @@
     </div>
   </section>
 
-  <!-- SUPPLIER RELATIONSHIPS -->
+  <!-- SUPPLIER RELATIONSHIPS + LOGISTICS -->
   <section class="block alt vendors">
-    <div class="wrap">
-      <p class="eyebrow">Our supplier network</p>
-      <h2>We know the people who make the food</h2>
-      <p class="lead" style="margin-left:auto;margin-right:auto;">We buy directly from food
-        manufacturers and suppliers across the country, many of them for years. We keep our
-        overhead low, and that is exactly how we keep your pricing low and your supply steady.</p>
-      <p class="vendor-eq">Strong vendor relationships = better pricing and consistent supply</p>
+    <div class="wrap vendors-grid">
+      <div class="vendors-text">
+        <p class="eyebrow">Our supplier network</p>
+        <h2>We know the people who make the food</h2>
+        <p class="lead">We buy directly from food
+          manufacturers and suppliers across the country, many of them for years. We keep our
+          overhead low, and that is exactly how we keep your pricing low and your supply steady.</p>
+        <p class="vendor-eq">Strong vendor relationships = better pricing and consistent supply</p>
+      </div>
+      <div class="logi-rotator" aria-label="Logistics photo gallery">
+        <figure class="lslide is-active"><img src="assets/stock/truck.jpg" alt="Freight truck"><figcaption>By land</figcaption></figure>
+        <figure class="lslide"><img src="assets/stock/rail.jpg" alt="Freight rail"><figcaption>By rail</figcaption></figure>
+        <figure class="lslide"><img src="assets/stock/hero-logistics.jpg" alt="Cargo ship"><figcaption>By sea</figcaption></figure>
+        <figure class="lslide"><img src="assets/stock/warehouse-2.jpg" alt="Warehouse stocked and ready"><figcaption>Warehoused &amp; ready</figcaption></figure>
+        <div class="ldots" aria-hidden="true"></div>
+        <button class="lrot-btn lprev" type="button" aria-label="Previous logistics photo">&#8249;</button>
+        <button class="lrot-btn lnext" type="button" aria-label="Next logistics photo">&#8250;</button>
+      </div>
     </div>
   </section>
 
@@ -325,13 +332,13 @@
       startAuto();
     })();
 
-    // Rotating food picture frame (dots are generated, so slides can be added freely)
-    (function () {
-      var root = document.querySelector('.food-rotator');
+    // Picture-frame rotators (dots are generated, so slides can be added freely)
+    function initFrameRotator(rootSel, sel, interval) {
+      var root = document.querySelector(rootSel);
       if (!root) return;
-      var slides = root.querySelectorAll('.fslide');
+      var slides = root.querySelectorAll(sel.slide);
       if (slides.length < 2) return;
-      var dotWrap = root.querySelector('.fdots');
+      var dotWrap = root.querySelector(sel.dots);
       var dots = [];
       for (var d = 0; d < slides.length; d++) {
         var dot = document.createElement('i');
@@ -351,12 +358,14 @@
       function startAuto() {
         if (!autoOk) return;
         if (timer) clearInterval(timer);
-        timer = setInterval(function () { show(i + 1); }, 3500);
+        timer = setInterval(function () { show(i + 1); }, interval);
       }
-      root.querySelector('.fprev').addEventListener('click', function () { show(i - 1); startAuto(); });
-      root.querySelector('.fnext').addEventListener('click', function () { show(i + 1); startAuto(); });
+      root.querySelector(sel.prev).addEventListener('click', function () { show(i - 1); startAuto(); });
+      root.querySelector(sel.next).addEventListener('click', function () { show(i + 1); startAuto(); });
       startAuto();
-    })();
+    }
+    initFrameRotator('.food-rotator', { slide: '.fslide', dots: '.fdots', prev: '.fprev', next: '.fnext' }, 3500);
+    initFrameRotator('.logi-rotator', { slide: '.lslide', dots: '.ldots', prev: '.lprev', next: '.lnext' }, 3500);
 
     // Rotating testimonials
     (function () {
