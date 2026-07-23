@@ -1,2 +1,4 @@
 User-agent: *
 Disallow:
+
+Sitemap: https://idealspecialties.net/sitemap.xml
