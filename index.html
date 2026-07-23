@@ -42,9 +42,10 @@
         <div class="rotator">
           <figure class="slide is-active"><img src="assets/stock/hero-pantry-staples.jpg" alt="Canned goods and pantry staples"><figcaption>Pantry staples</figcaption></figure>
           <figure class="slide"><img src="assets/food/chicken-tenders.jpg" alt="Boneless chicken tenders tray"><figcaption>Chicken tenders</figcaption></figure>
+          <figure class="slide"><img class="fit-contain" src="assets/food/whole-chicken.png" alt="Whole chicken"><figcaption>Whole chicken</figcaption></figure>
           <figure class="slide"><img src="assets/stock/rice.jpg" alt="Rice"><figcaption>Rice &amp; grains</figcaption></figure>
           <figure class="slide"><img src="assets/stock/protein-turkey.jpg" alt="Turkey breast"><figcaption>Turkey</figcaption></figure>
-          <div class="dots"><i class="on"></i><i></i><i></i><i></i></div>
+          <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
           <button class="rot-btn prev" type="button" aria-label="Previous photo">&#8249;</button>
           <button class="rot-btn next" type="button" aria-label="Next photo">&#8250;</button>
         </div>
@@ -158,6 +159,7 @@
         <div class="fg-panel">
           <div class="fg-frame" role="button" tabindex="0" aria-label="Chicken photos">
             <img class="fg-slide fit-contain is-active" src="assets/food/chicken-tenders.jpg" alt="Boneless chicken tenders tray">
+            <img class="fg-slide fit-contain" src="assets/food/whole-chicken.png" alt="Whole chicken" data-caption="Whole chicken">
             <img class="fg-slide fit-contain" src="assets/food/boneless-breasts.jpg" alt="Boneless chicken breasts tray">
             <img class="fg-slide fit-contain" src="assets/food/chicken-wings.jpg" alt="Chicken wings tray">
             <img class="fg-slide fit-contain" src="assets/food/chicken-thighs.jpg" alt="Chicken drumsticks tray">
@@ -484,6 +486,8 @@
         (function (frame, idx) {
           var slides = frame.querySelectorAll('.fg-slide');
           if (slides.length < 2) return;
+          var caption = frame.parentElement.querySelector('.fg-cap');
+          var defaultCaption = caption ? caption.textContent : '';
           var dotWrap = frame.querySelector('.fg-dots');
           var dots = [];
           for (var d = 0; d < slides.length; d++) {
@@ -499,6 +503,7 @@
             i = (n + slides.length) % slides.length;
             slides[i].classList.add('is-active');
             dots[i].classList.add('on');
+            if (caption) caption.textContent = slides[i].getAttribute('data-caption') || defaultCaption;
           }
           function stopAuto() {
             if (timer) clearInterval(timer);
