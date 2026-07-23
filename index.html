@@ -311,14 +311,38 @@
           opportunity buying. We track down high-quality product that manufacturers need to move,
           then pass the savings straight through to you.</p>
         <div class="opp-grid2">
-          <div class="opp-tkt">Short-dated product</div>
-          <div class="opp-tkt">Packaging changes</div>
-          <div class="opp-tkt">Label misprints</div>
-          <div class="opp-tkt">Overstock inventory</div>
-          <div class="opp-tkt">Order cancellations</div>
-          <div class="opp-tkt">Production overruns</div>
-          <div class="opp-tkt">Out-of-spec product</div>
-          <div class="opp-tkt">Seasonal overages</div>
+          <button class="opp-tkt" type="button" aria-describedby="opp-short-dated" aria-expanded="false">
+            <span>Short-dated product</span><span class="opp-info" aria-hidden="true">i</span>
+            <span class="opp-definition" id="opp-short-dated" role="tooltip">Product with a shorter remaining shelf life. We always disclose dates before purchase and offer only product suitable for distribution under applicable food-safety requirements.</span>
+          </button>
+          <button class="opp-tkt" type="button" aria-describedby="opp-packaging" aria-expanded="false">
+            <span>Packaging changes</span><span class="opp-info" aria-hidden="true">i</span>
+            <span class="opp-definition" id="opp-packaging" role="tooltip">Product remaining while a manufacturer transitions to new packaging, case design, size, or branding. The food inside is unchanged, and relevant differences are shared before purchase.</span>
+          </button>
+          <button class="opp-tkt" type="button" aria-describedby="opp-misprints" aria-expanded="false">
+            <span>Label misprints</span><span class="opp-info" aria-hidden="true">i</span>
+            <span class="opp-definition" id="opp-misprints" role="tooltip">A packaging-print issue that does not change the food itself. The issue is disclosed, and the product must remain eligible for distribution.</span>
+          </button>
+          <button class="opp-tkt" type="button" aria-describedby="opp-overstock" aria-expanded="false">
+            <span>Overstock inventory</span><span class="opp-info" aria-hidden="true">i</span>
+            <span class="opp-definition" id="opp-overstock" role="tooltip">Excess inventory above planned demand. It is typically standard product offered at an opportunity-buy price while quantities last.</span>
+          </button>
+          <button class="opp-tkt" type="button" aria-describedby="opp-cancellations" aria-expanded="false">
+            <span>Order cancellations</span><span class="opp-info" aria-hidden="true">i</span>
+            <span class="opp-definition" id="opp-cancellations" role="tooltip">Product made or reserved for an order that another buyer canceled. Quantities and delivery timing may be limited.</span>
+          </button>
+          <button class="opp-tkt" type="button" aria-describedby="opp-overruns" aria-expanded="false">
+            <span>Production overruns</span><span class="opp-info" aria-hidden="true">i</span>
+            <span class="opp-definition" id="opp-overruns" role="tooltip">Extra product made beyond the original order or forecast. Availability is usually limited to that specific production run.</span>
+          </button>
+          <button class="opp-tkt" type="button" aria-describedby="opp-out-of-spec" aria-expanded="false">
+            <span>Out-of-spec product</span><span class="opp-info" aria-hidden="true">i</span>
+            <span class="opp-definition" id="opp-out-of-spec" role="tooltip">Product outside a buyer's non-safety specification, such as size, weight, color, or count. We disclose the variance, and the product must remain suitable for distribution.</span>
+          </button>
+          <button class="opp-tkt" type="button" aria-describedby="opp-seasonal" aria-expanded="false">
+            <span>Seasonal overages</span><span class="opp-info" aria-hidden="true">i</span>
+            <span class="opp-definition" id="opp-seasonal" role="tooltip">Surplus inventory after a seasonal promotion or demand period. Available quantities and product dates are disclosed before purchase.</span>
+          </button>
         </div>
         <p class="opp-close2">Same quality food. A price that stretches your budget further.</p>
       </div>
@@ -528,6 +552,41 @@
           if (autoOk) setTimeout(resumeAuto, idx * 700);
         })(frames[f], f);
       }
+    })();
+
+    // Opportunity definitions: hover/focus works in CSS; taps toggle the same popups.
+    (function () {
+      var tickets = document.querySelectorAll('.opp-tkt');
+
+      function closeAll(except) {
+        for (var i = 0; i < tickets.length; i++) {
+          if (tickets[i] !== except) {
+            tickets[i].classList.remove('is-open');
+            tickets[i].setAttribute('aria-expanded', 'false');
+          }
+        }
+      }
+
+      for (var i = 0; i < tickets.length; i++) {
+        tickets[i].addEventListener('mouseenter', function () { closeAll(this); });
+        tickets[i].addEventListener('focusin', function () { closeAll(this); });
+        tickets[i].addEventListener('click', function (event) {
+          event.stopPropagation();
+          var willOpen = !this.classList.contains('is-open');
+          closeAll(this);
+          this.classList.toggle('is-open', willOpen);
+          this.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        });
+        tickets[i].addEventListener('keydown', function (event) {
+          if (event.key === 'Escape') {
+            this.classList.remove('is-open');
+            this.setAttribute('aria-expanded', 'false');
+            this.blur();
+          }
+        });
+      }
+
+      document.addEventListener('click', function () { closeAll(); });
     })();
   </script>
 
