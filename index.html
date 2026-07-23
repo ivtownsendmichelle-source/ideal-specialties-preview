@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>I Deal Specialties · Food Procurement for Food Banks</title>
   <meta name="description" content="I Deal Specialties is a woman-owned, family-run food broker serving 150+ food banks. Delivered pricing on proteins and shelf-stable staples, from Boston to Hawaii.">
-  <!-- Absolute URLs below assume the current domain; confirm at deploy time. -->
   <link rel="canonical" href="https://www.idealspecialties.net/">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <meta property="og:type" content="website">
@@ -15,7 +14,7 @@
   <meta property="og:image" content="https://www.idealspecialties.net/assets/og-image.png">
   <link rel="stylesheet" href="base.css">
   <link rel="stylesheet" href="americana.css">
-  <link rel="stylesheet" href="proposed.css">
+  <link rel="stylesheet" href="site.css">
 </head>
 <body class="site">
 
@@ -30,7 +29,7 @@
     </nav>
   </header>
 
-  <!-- HERO (cargo ship + baked navy-to-red wash) -->
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-copy">
@@ -91,7 +90,7 @@
     <div class="wrap">
       <div class="mark"><img src="assets/partnership.png" alt="The I Deal Partnership"></div>
       <div>
-        <p class="eyebrow" style="color:#ffe08a">The I Deal Partnership</p>
+        <p class="eyebrow">The I Deal Partnership</p>
         <h2>Strong partnerships feed more families</h2>
         <p>Every food bank we serve gets the same thing: a call back, a fair price, and product
           that shows up when we said it would.</p>
@@ -294,7 +293,7 @@
       <p class="catchall">Don't see what you need? We'll help.</p>
       <img class="source-banner at-bottom" src="assets/stock/source-banner.jpg" alt="Warehouse stocked with food, ready to ship">
 
-      <p class="eyebrow flex-eyebrow" style="margin-top:48px">Flexible sourcing</p>
+      <p class="eyebrow flex-eyebrow">Flexible sourcing</p>
       <div class="sourcing-strip">
         <span class="chip">Full truckloads</span>
         <span class="chip">Half truckloads when available</span>
@@ -322,7 +321,7 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS (real partner quotes) -->
+  <!-- TESTIMONIALS -->
   <section class="block testi">
     <div class="wrap">
       <p class="eyebrow">What partners say</p>
@@ -391,8 +390,10 @@
 
   <script>
     (function () {
-      var slides = document.querySelectorAll('.rotator .slide');
-      var dots = document.querySelectorAll('.rotator .dots i');
+      var root = document.querySelector('.rotator');
+      if (!root) return;
+      var slides = root.querySelectorAll('.slide');
+      var dots = root.querySelectorAll('.dots i');
       if (slides.length < 2) return;
       var i = 0, timer = null;
       var autoOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -403,17 +404,28 @@
         slides[i].classList.add('is-active');
         if (dots[i]) dots[i].classList.add('on');
       }
+      function stopAuto() {
+        if (timer) clearInterval(timer);
+        timer = null;
+      }
       function startAuto() {
         if (!autoOk) return;
-        if (timer) clearInterval(timer);
-        timer = setInterval(function () { show(i + 1); }, 4000);
+        stopAuto();
+        timer = setInterval(function () { show(i + 1); }, 3200);
       }
-      document.querySelector('.rotator .prev').addEventListener('click', function () {
-        show(i - 1); startAuto();
+      function resumeAuto() {
+        if (!root.matches(':hover') && !root.contains(document.activeElement)) startAuto();
+      }
+      root.querySelector('.prev').addEventListener('click', function () {
+        show(i - 1); resumeAuto();
       });
-      document.querySelector('.rotator .next').addEventListener('click', function () {
-        show(i + 1); startAuto();
+      root.querySelector('.next').addEventListener('click', function () {
+        show(i + 1); resumeAuto();
       });
+      root.addEventListener('mouseenter', stopAuto);
+      root.addEventListener('mouseleave', resumeAuto);
+      root.addEventListener('focusin', stopAuto);
+      root.addEventListener('focusout', function () { setTimeout(resumeAuto, 0); });
       startAuto();
     })();
 
@@ -440,16 +452,27 @@
         slides[i].classList.add('is-active');
         dots[i].classList.add('on');
       }
+      function stopAuto() {
+        if (timer) clearInterval(timer);
+        timer = null;
+      }
       function startAuto() {
         if (!autoOk) return;
-        if (timer) clearInterval(timer);
+        stopAuto();
         timer = setInterval(function () { show(i + 1); }, interval);
       }
-      root.querySelector(sel.prev).addEventListener('click', function () { show(i - 1); startAuto(); });
-      root.querySelector(sel.next).addEventListener('click', function () { show(i + 1); startAuto(); });
+      function resumeAuto() {
+        if (!root.matches(':hover') && !root.contains(document.activeElement)) startAuto();
+      }
+      root.querySelector(sel.prev).addEventListener('click', function () { show(i - 1); resumeAuto(); });
+      root.querySelector(sel.next).addEventListener('click', function () { show(i + 1); resumeAuto(); });
+      root.addEventListener('mouseenter', stopAuto);
+      root.addEventListener('mouseleave', resumeAuto);
+      root.addEventListener('focusin', stopAuto);
+      root.addEventListener('focusout', function () { setTimeout(resumeAuto, 0); });
       startAuto();
     }
-    initFrameRotator('.logi-rotator', { slide: '.lslide', dots: '.ldots', prev: '.lprev', next: '.lnext' }, 3500);
+    initFrameRotator('.logi-rotator', { slide: '.lslide', dots: '.ldots', prev: '.lprev', next: '.lnext' }, 2800);
 
     // Food grid: panels with more than one photo crossfade (staggered), click/Enter advances
     (function () {
@@ -475,16 +498,27 @@
             slides[i].classList.add('is-active');
             dots[i].classList.add('on');
           }
+          function stopAuto() {
+            if (timer) clearInterval(timer);
+            timer = null;
+          }
           function startAuto() {
             if (!autoOk) return;
-            if (timer) clearInterval(timer);
-            timer = setInterval(function () { show(i + 1); }, 4200);
+            stopAuto();
+            timer = setInterval(function () { show(i + 1); }, 3400);
           }
-          frame.addEventListener('click', function () { show(i + 1); startAuto(); });
+          function resumeAuto() {
+            if (!frame.matches(':hover') && !frame.contains(document.activeElement)) startAuto();
+          }
+          frame.addEventListener('click', function () { show(i + 1); resumeAuto(); });
           frame.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(i + 1); startAuto(); }
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(i + 1); resumeAuto(); }
           });
-          if (autoOk) setTimeout(startAuto, idx * 900);
+          frame.addEventListener('mouseenter', stopAuto);
+          frame.addEventListener('mouseleave', resumeAuto);
+          frame.addEventListener('focusin', stopAuto);
+          frame.addEventListener('focusout', function () { setTimeout(resumeAuto, 0); });
+          if (autoOk) setTimeout(resumeAuto, idx * 700);
         })(frames[f], f);
       }
     })();

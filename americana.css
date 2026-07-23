@@ -1,9 +1,4 @@
-/* Warm Americana skin — direction B chosen 2026-07-02.
-   Loads AFTER base.css and REPLACES site.css. Same brand palette (royal blue +
-   brand red sampled from the logos), same copy, same photos, same section order.
-   New language: square corners, solid 2px navy borders, hard offset "print"
-   shadows (no soft blurs), stamp section labels, price-sheet product table,
-   Fraunces serif display. */
+/* Warm Americana theme layered after base.css. */
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,500;1,9..144,700&display=swap');
 
@@ -14,7 +9,7 @@
   --shadow-red: 5px 5px 0 var(--red);
 }
 
-/* ---------- type: serif display everywhere Montserrat was ---------- */
+/* ---------- type ---------- */
 h1, h2 { font-family: var(--font-serif); font-weight: 700; letter-spacing: -.005em; }
 .pullquote, .statband .stat .num, .contact-card .name, .site-footer .tag,
 .hero .trustline { font-family: var(--font-serif); }
@@ -43,6 +38,9 @@ h1, h2 { font-family: var(--font-serif); font-weight: 700; letter-spacing: -.005
   background: var(--navy); border-color: var(--navy); color: #fff; }
 
 /* ---------- header ---------- */
+.site-header .logo { flex: 0 0 auto; }
+.site-header .logo img { height: 132px; width: auto; }
+.nav { flex-wrap: wrap; }
 .nav .phone { border-radius: 0; box-shadow: 3px 3px 0 var(--red); }
 .nav .phone:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--red); }
 
@@ -102,7 +100,7 @@ h1, h2 { font-family: var(--font-serif); font-weight: 700; letter-spacing: -.005
 /* ---------- partnership: serif italic label, framed mark ---------- */
 .partnership .eyebrow { background: none; transform: none; padding: 0;
   font-family: var(--font-serif); font-style: italic; text-transform: none;
-  letter-spacing: .01em; font-size: 19px; font-weight: 600; }
+  letter-spacing: .01em; font-size: 19px; font-weight: 600; color: #ffe08a; }
 .partnership .mark { border-radius: 0; box-shadow: 8px 8px 0 var(--red); }
 .programs { gap: 14px; }
 .programs li { border: 1.5px solid rgba(255,255,255,.85); padding: 8px 16px;
@@ -132,9 +130,6 @@ h1, h2 { font-family: var(--font-serif); font-weight: 700; letter-spacing: -.005
 
 /* ---------- testimonials ---------- */
 .testi { background: var(--cream); }
-.testi .card { border-radius: 0; border: 2px solid var(--navy); background: #fff;
-  box-shadow: var(--shadow-red); padding: 26px 26px 24px; }
-.testi .card:nth-child(2) { box-shadow: var(--shadow-navy); }
 .testi .quote { font-family: var(--font-serif); color: #4a4438; }
 .testi .quote::before { content: "\201C"; display: block;
   font-family: var(--font-serif); font-size: 54px; line-height: .55;
@@ -146,10 +141,7 @@ h1, h2 { font-family: var(--font-serif); font-weight: 700; letter-spacing: -.005
 /* ---------- contact page ---------- */
 .contact-card { border-radius: 0; border: 2px solid var(--navy);
   box-shadow: var(--shadow-red); background: #fff; }
-.contact-card + .contact-card, .contact-card[style] { box-shadow: var(--shadow-navy); }
-
-/* ---------- mockup banner ---------- */
-.mock-banner { letter-spacing: .1em; }
+.contact-card + .contact-card { box-shadow: var(--shadow-navy); }
 
 /* ---------- small screens: keep offsets from crowding ---------- */
 @media (max-width: 760px) {
@@ -157,4 +149,56 @@ h1, h2 { font-family: var(--font-serif); font-weight: 700; letter-spacing: -.005
   .statband .wrap { flex-direction: column; }
   .statband .stat + .stat { border-left: none; border-top: 2px dashed var(--line);
     padding-top: 12px; margin-top: 12px; }
+  .site-header {
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px 24px 18px;
+    gap: 12px;
+  }
+  .site-header .logo img { height: 118px; }
+  .nav { justify-content: center; gap: 16px 22px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
+@media (max-width: 620px) {
+  :root { --section-pad: 56px; }
+  .wrap {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .eyebrow { font-size: 13px; }
+  .site-header {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .nav {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 12px 18px;
+  }
+  .nav .phone {
+    grid-column: 1 / -1;
+    width: min(100%, 320px);
+    justify-self: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header .logo img { height: 104px; }
+  .nav { width: 100%; gap: 12px 16px; }
+  .nav a { font-size: 14.5px; }
+  .nav .phone { width: 100%; text-align: center; }
+  .contact-card { padding: 24px; }
+  .contact-card .btn {
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    text-align: center;
+  }
 }
