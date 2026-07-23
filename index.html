@@ -512,7 +512,7 @@
           function startAuto() {
             if (!autoOk) return;
             stopAuto();
-            timer = setInterval(function () { show(i + 1); }, 3400);
+            timer = setInterval(function () { show(i + 1); }, 3000);
           }
           function resumeAuto() {
             if (!frame.matches(':hover') && !frame.contains(document.activeElement)) startAuto();
