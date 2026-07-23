@@ -32,7 +32,7 @@
   color: #fff;
 }
 .cta:has(.btn-secondary:hover) .btn-primary,
-.cta:has(.btn-secondary:focus) .btn-primary,
+.cta:has(.btn-secondary:focus-visible) .btn-primary,
 .cta:has(.btn-secondary:active) .btn-primary {
   background: transparent;
   border-color: rgba(255,255,255,.9);
