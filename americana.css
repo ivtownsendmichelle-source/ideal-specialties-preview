@@ -41,8 +41,8 @@ h1, h2 { font-family: var(--font-serif); font-weight: 700; letter-spacing: -.005
 .site-header .logo { flex: 0 0 auto; }
 .site-header .logo img { height: 132px; width: auto; }
 .nav { flex-wrap: wrap; }
-.nav .phone { border-radius: 0; box-shadow: 3px 3px 0 var(--navy); }
-.nav .phone:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--navy-deep); }
+.nav .phone { border-radius: 0; box-shadow: 3px 3px 0 var(--red); }
+.nav .phone:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--red); }
 
 /* ---------- hero: keep the navy + red-bloom gradient, frame the photo box ---------- */
 .hero {

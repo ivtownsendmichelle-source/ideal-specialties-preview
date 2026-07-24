@@ -344,7 +344,7 @@
 }
 .footer-brand .fb-text {
   text-align: center; background: var(--navy-rich);
-  border: 2px solid var(--box-outline); box-shadow: 6px 6px 0 var(--navy-rich);
+  border: 2px solid rgba(255,224,138,.7); box-shadow: 6px 6px 0 var(--red);
   padding: 26px 44px;
 }
 .footer-brand .fb-logo {
