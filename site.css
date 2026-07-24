@@ -40,6 +40,11 @@
   color: #fff;
   transform: none;
 }
+.rotator .slide:has(img.fit-contain) { background: var(--cream); }
+.rotator img.fit-contain {
+  background: var(--cream);
+  mix-blend-mode: multiply;
+}
 /* red vertical accent line (matching the pullquote) on two more lines */
 .vendor-eq { border-left: 4px solid var(--red); }
 .catchall {
@@ -53,7 +58,7 @@
    WHAT PARTNERS SAY navy */
 /* supplier network: solid red section, text left, logistics rotator right */
 .block.alt.vendors { background: var(--red-deep); }
-.block.alt.vendors .eyebrow { background: var(--navy); transform: rotate(-1.2deg); }
+.block.alt.vendors .eyebrow { background: var(--navy); transform: none; }
 .vendors { text-align: left; }
 .vendors .wrap.vendors-grid {
   max-width: 1080px;
@@ -78,7 +83,7 @@
 /* same look as the hero rotator: photo fills the frame, caption overlays the photo */
 .logi-rotator {
   position: relative; aspect-ratio: 4 / 3; overflow: hidden;
-  border: 3px solid var(--cream); box-shadow: 7px 7px 0 var(--navy-rich);
+  border: 3px solid var(--box-outline); box-shadow: 7px 7px 0 var(--navy-rich);
   background: #0e1f40;
 }
 .logi-rotator .lslide { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity .65s ease; }
@@ -109,16 +114,16 @@
 @media (max-width: 620px) {
   .lrot-btn { display: none; }
 }
-#source .flex-eyebrow { background: var(--navy); transform: rotate(-1.2deg); margin-top: 48px; }
+#source .flex-eyebrow { background: var(--navy); transform: none; margin-top: 48px; }
 
 /* opportunity buying — a bordered feature box matching the page's card style */
-.opp-box { background: #fff; border: 2px solid var(--navy); box-shadow: 8px 8px 0 var(--navy);
+.opp-box { background: #fff; border: 2px solid var(--box-outline); box-shadow: 8px 8px 0 var(--navy);
   padding: 32px 40px; margin: 34px 0 0; text-align: left; }
 .opp-box .opp-h { font-family: var(--font-serif); color: var(--navy); font-weight: 700;
   font-size: 25px; margin: 4px 0 10px; }
 .opp-box .opp-intro { margin: 0 0 22px; color: #3a3a3a; max-width: 840px; }
 .opp-grid2 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 0 0 22px; }
-.opp-tkt { appearance: none; width: 100%; border: 2px solid var(--navy); background: var(--cream); box-shadow: 4px 4px 0 var(--red);
+.opp-tkt { appearance: none; width: 100%; border: 2px solid var(--box-outline); background: var(--cream); box-shadow: 4px 4px 0 var(--red);
   padding: 12px 15px; font-weight: 700; font-size: 14.5px; color: var(--navy);
   font-family: inherit; line-height: 1.3; text-align: left; cursor: help;
   display: flex; align-items: center; gap: 9px; min-width: 0; min-height: 56px; position: relative;
@@ -127,18 +132,20 @@
 .opp-info { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center;
   width: 18px; height: 18px; margin-left: auto; border: 1.5px solid currentColor; border-radius: 50%;
   font-family: Georgia, serif; font-size: 12px; font-style: italic; line-height: 1; }
-.opp-tkt:nth-child(even) { box-shadow: 4px 4px 0 var(--navy); }
+.opp-tkt:nth-child(even) { border-color: var(--box-outline); box-shadow: 4px 4px 0 var(--navy); }
 .opp-tkt:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--red); }
 .opp-tkt:nth-child(even):hover { box-shadow: 6px 6px 0 var(--navy); }
 .opp-definition { position: absolute; z-index: 30; left: 50%; bottom: calc(100% + 12px);
   --opp-definition-x: -50%;
   width: min(320px, calc(100vw - 48px)); padding: 13px 15px;
-  border: 2px solid #fff; background: var(--red); box-shadow: 5px 5px 0 var(--navy);
+  border: 2px solid var(--box-outline); background: var(--red); box-shadow: 5px 5px 0 var(--red);
   color: #fff; font-size: 14.5px; font-weight: 500; line-height: 1.45; text-align: left;
   opacity: 0; visibility: hidden; pointer-events: none;
   transform: translate(var(--opp-definition-x), 6px);
   transition: opacity .14s ease, transform .14s ease, visibility .14s; }
-.opp-tkt:nth-child(even) .opp-definition { background: var(--navy); box-shadow: 5px 5px 0 var(--red); }
+.opp-tkt:nth-child(even) .opp-definition {
+  border-color: var(--box-outline); background: var(--navy); box-shadow: 5px 5px 0 var(--navy);
+}
 .opp-tkt:nth-child(4n + 1) .opp-definition { --opp-definition-x: 0; left: 0; }
 .opp-tkt:nth-child(4n) .opp-definition { --opp-definition-x: 0; right: 0; left: auto; }
 .opp-tkt:hover, .opp-tkt:focus-visible, .opp-tkt.is-open { z-index: 20; }
@@ -293,10 +300,10 @@
 }
 .fg-panel { margin: 0; }
 .fg-frame {
-  position: relative; aspect-ratio: 1 / 1; overflow: hidden; background: #fff;
-  border: 2px solid var(--navy); box-shadow: var(--shadow-navy);
+  position: relative; aspect-ratio: 1 / 1; overflow: hidden; background: var(--cream);
+  border: 2px solid var(--box-outline); box-shadow: var(--shadow-navy);
 }
-.fg-panel:nth-child(even) .fg-frame { box-shadow: var(--shadow-red); }
+.fg-panel:nth-child(even) .fg-frame { border-color: var(--box-outline); box-shadow: var(--shadow-red); }
 .fg-frame[role="button"] { cursor: pointer; }
 .fg-slide {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
@@ -304,6 +311,11 @@
 }
 .fg-slide.is-active { opacity: 1; }
 .fg-slide.fit-contain { object-fit: contain; }
+.fg-slide.fit-contain,
+.fg-slide.cream-bg {
+  background: var(--cream);
+  mix-blend-mode: multiply;
+}
 .fg-dots { position: absolute; top: 10px; right: 10px; display: flex; gap: 5px; z-index: 2; }
 .fg-dots i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.6);
   border: 1px solid rgba(26,58,122,.35); transition: background .3s ease; }
@@ -332,7 +344,7 @@
 }
 .footer-brand .fb-text {
   text-align: center; background: var(--navy-rich);
-  border: 2px solid rgba(255,224,138,.7); box-shadow: 6px 6px 0 var(--red);
+  border: 2px solid var(--box-outline); box-shadow: 6px 6px 0 var(--navy-rich);
   padding: 26px 44px;
 }
 .footer-brand .fb-logo {
@@ -362,15 +374,15 @@
 }
 .testi-card {
   margin: 0;
-  background: #fff; border: 2px solid var(--navy);
+  background: #fff; border: 2px solid var(--box-outline);
   color: var(--ink);
   padding: 34px 38px; min-height: 250px;
   display: flex; flex-direction: column; justify-content: flex-start;
 }
-.testi-card:nth-child(odd) { box-shadow: 8px 8px 0 var(--red); }
+.testi-card:nth-child(odd) { border-color: var(--box-outline); box-shadow: 8px 8px 0 var(--red); }
 .testi-card:nth-child(even) {
   background: #fff;
-  border-color: var(--navy);
+  border-color: var(--box-outline);
   box-shadow: 8px 8px 0 var(--navy);
 }
 .testi-card .quote { margin: 0 0 22px; font-size: 20px; line-height: 1.45; color: #4a4438; }
