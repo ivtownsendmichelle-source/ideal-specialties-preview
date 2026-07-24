@@ -209,6 +209,10 @@ section.block { padding: var(--section-pad) 0; }
 .cta .btn-primary:hover { background: var(--red-deep); border-color: var(--red-deep); }
 
 /* contact */
+.contact-heading {
+  font-size: clamp(28px, 3.4vw, 38px);
+  color: var(--accent);
+}
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 34px; }
 .contact-grid > * { min-width: 0; }
 .contact-card { background: var(--paper); border: 1px solid var(--line); border-left: 4px solid var(--red);
