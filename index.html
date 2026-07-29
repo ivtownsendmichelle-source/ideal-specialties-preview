@@ -568,9 +568,23 @@
           function resumeAuto() {
             if (!frame.matches(':hover') && !frame.contains(document.activeElement)) startAuto();
           }
-          frame.addEventListener('click', function () { show(i + 1); resumeAuto(); });
+          var btnPrev = document.createElement('button');
+          btnPrev.type = 'button';
+          btnPrev.className = 'fg-btn fg-prev';
+          btnPrev.setAttribute('aria-label', 'Previous photo');
+          btnPrev.innerHTML = '&#8249;';
+          var btnNext = document.createElement('button');
+          btnNext.type = 'button';
+          btnNext.className = 'fg-btn fg-next';
+          btnNext.setAttribute('aria-label', 'Next photo');
+          btnNext.innerHTML = '&#8250;';
+          frame.appendChild(btnPrev);
+          frame.appendChild(btnNext);
+          btnPrev.addEventListener('click', function (e) { e.stopPropagation(); show(i - 1); resumeAuto(); });
+          btnNext.addEventListener('click', function (e) { e.stopPropagation(); show(i + 1); resumeAuto(); });
           frame.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(i + 1); resumeAuto(); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); show(i - 1); resumeAuto(); }
+            else if (e.key === 'ArrowRight' || e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(i + 1); resumeAuto(); }
           });
           frame.addEventListener('mouseenter', stopAuto);
           frame.addEventListener('mouseleave', resumeAuto);
